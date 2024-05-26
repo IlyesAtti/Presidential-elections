@@ -1,0 +1,51 @@
+table, td, th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+  
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #fff;
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+
+.btn-next-round {
+  background-color: red;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 45%;
+}
+
+.btn-vote {
+  background-color: green;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.round_list{
+  color:#fff;
+  display: inline-block; 
+  margin-right: 10px; 
+}
+
+.votes_view {
+  display: block;
+  background-color: #1f2937;
+  padding: 5%;
+  border-radius: 8px;
+}
+
+.prev_rounds{
+  font-size: 22px;
+  color:chocolate;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-top: -25px;
+}
