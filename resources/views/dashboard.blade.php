@@ -63,7 +63,7 @@
                         <tbody>
                             @foreach($candidates as $candidate)
                                 <tr>
-                                    <td>{{ $candidate->user->name }}</td>
+                                    <td>{{ $candidate->userName }}</td>
                                     <td>{{ $candidate->votes }}</td>
                                     @if($currentRoundIndex == $newRoundIndex)
                                         <td>
