@@ -25,14 +25,6 @@
                 <button type="submit" class="btn-candidate">Candidate</button>
             </form>
         @endif
-
-        {{--
-        <form method="POST" action="{{ route('candidate') }}">
-            @csrf
-            <input type="hidden" name="userId" value="{{ Auth::id() }}">
-            <input type="hidden" name="roundIndex" value="{{ $currentRoundIndex }}">
-            <button type="submit" class="btn-candidate">Candidate</button>
-        </form>--}}
         @if (session('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
