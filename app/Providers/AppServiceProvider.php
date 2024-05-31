@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
-use App\Observers\CandidateObserver;
 use App\Models\User;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +23,6 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(): void {
-        User::observe(CandidateObserver::class);
 
         self::$currentRoundIndex = Candidate::max('roundIndex') ?? 1;
     }

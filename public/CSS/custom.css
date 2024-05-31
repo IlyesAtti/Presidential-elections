@@ -14,22 +14,25 @@ th, td {
   text-align: center;
 }
 
+button {
+  padding: 10px;
+  border-radius: 8px;
+}
+
 .btn-next-round {
   background-color: red;
   color: #fff;
-  padding: 10px;
-  border-radius: 8px;
   margin-left: 45%;
+  font-size: 22px;
 }
 
 .btn-vote {
   background-color: green;
   color: #fff;
-  border-radius: 8px;
-  padding: 10px;
+
 }
 
-.round_list{
+.round_list {
   color:#fff;
   display: inline-block; 
   margin-right: 10px; 
@@ -42,10 +45,48 @@ th, td {
   border-radius: 8px;
 }
 
-.prev_rounds{
+.prev_rounds {
   font-size: 22px;
   color:chocolate;
   text-align: center;
   padding-bottom: 10px;
   margin-top: -25px;
+}
+
+.btn-revoke-vote {
+  background-color: red;
+  color:#fff;
+}
+
+.btn-candidate {
+  color: #000;
+  background-color: rgb(169, 233, 97);
+  margin-left: 45%;
+  font-size: 22px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.btn-revoke-candidate {
+  color: #000;
+  background-color: rgb(255, 2, 2);
+  margin-left: 45%;
+  font-size: 22px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
 }

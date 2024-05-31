@@ -11,9 +11,11 @@ class Candidate extends Model {
 
     protected $fillable = [
         'userId',
+        'userName',
         'roundIndex',
         'isVoted',
-        'votes'
+        'votes',
+        'votedFor'
     ];
 
     protected $hidden = [

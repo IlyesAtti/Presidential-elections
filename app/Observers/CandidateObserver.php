@@ -13,18 +13,6 @@ class CandidateObserver {
      */
     public function created(User $user): void {
         $currentRoundIndex = AppServiceProvider::getCurrentRoundIndex();
-        $existingCandidate = Candidate::where('userId', $user->id)
-                                        ->where('roundIndex', $currentRoundIndex)
-                                        ->first();
-    
-        if (!$existingCandidate) {
-            Candidate::create([
-                'userId' => $user->id,
-                'roundIndex' =>$currentRoundIndex,
-                'votes' => 0,
-                'isVoted' => false,
-            ]);
-        }
     }
 
 

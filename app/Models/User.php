@@ -55,6 +55,6 @@ class User extends Authenticatable
     }
 
     public function candidates() {
-        return $this->hasMany(Candidate::class, 'userId');
+        return $this->hasMany(Candidate::class, 'userId, userName');
     }
 }
