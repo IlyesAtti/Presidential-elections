@@ -12,6 +12,10 @@ class CandidatesController extends Controller {
     public function candidate(Request $request) {
         $user = Auth::user();
         $currentRoundIndex = Round::max('index');
+        $currentRoundIndex = $request->input('round', Round::max('index'));
+        if ($currentRoundIndex === null) {
+            $currentRoundIndex = 1;
+        }
         $existingCandidate = Candidate::where('userId', $user->id)
                                       ->where('roundIndex', $currentRoundIndex)
                                       ->first();
