@@ -3,27 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Candidate;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Round;
 
 class RoundController extends Controller {
-    public function nextRound(Request $req) {
-        $currentRoundIndex = Candidate::max('roundIndex');
+    public function nextRound(Request $request) {
+        $currentRoundIndex = Round::max('index');
         if ($currentRoundIndex === null) {
-            $currentRoundIndex = 1;
+            $currentRoundIndex = 0;
         }
 
         $newRoundIndex = $currentRoundIndex + 1;
-        $user = Auth::user();
-        
-        Candidate::create([
-            'userId' => $user->id,
-            'userName' => $user->name,
-            'roundIndex' => $newRoundIndex,
-            'votes' => 0,
-            'isVoted' => false,
-            'votedFor' => 0,
-        ]);
+
+        Round::create(['index' => $newRoundIndex]);
 
         return redirect()->route('dashboard', ['round' => $newRoundIndex]);
     }

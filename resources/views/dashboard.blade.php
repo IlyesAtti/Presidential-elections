@@ -55,29 +55,26 @@
                         <tbody>
                             @foreach($candidates as $candidate)
                                 <tr>
-                                    <td>{{ $candidate->userName }}</td>
+                                    <td>{{ $candidate->user->name }}</td>
                                     <td>{{ $candidate->votes }}</td>
                                     @if($currentRoundIndex == $newRoundIndex)
                                         <td>
-                                            @if(Auth::check() && !$userHasVoted)
-                                                <form action="/dashboard/vote" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="userId" value="{{ Auth::id() }}">
-                                                    <input type="hidden" name="id" value="{{ $candidate->id }}">
-                                                    <input type="hidden"  name="roundIndex" value="{{ $candidate->roundIndex }}">
-                                                    <button type="submit" class="btn-vote">Vote</button>
-                                                </form>
-                                            @else 
-                                                <form action="/dashboard/revokeVote" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="userId" value="{{ Auth::id() }}">
-                                                    <input type="hidden" name="id" value="{{ $candidate->id }}">
-                                                    <input type="hidden" name="roundIndex" value="{{ $candidate->roundIndex }}">
+                                            @if(Auth::check())
+                                                @if($userVotedCandidate && $userVotedCandidate->candidateId == $candidate->id)
+                                                    <form action="/dashboard/revokeVote" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $candidate->id }}">
+                                                        <button type="submit" class="btn-revoke-vote">Revoke Vote</button>
+                                                    </form>
+                                                @elseif(!$userHasVoted)
+                                                    <form action="/dashboard/vote" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $candidate->id }}">
+                                                        <button type="submit" class="btn-vote">Vote</button>
+                                                    </form>
+                                                @else
                                                     <p style="color:#fff">You have already voted</p>
-                                                    @if($userVotedCandidate && $userVotedCandidate->votedFor == $candidate->userId)
-                                                        <button type="submit" class="btn-revoke-vote">Revoke vote</button>
-                                                    @endif
-                                                </form>
+                                                @endif
                                             @endif
                                         </td>
                                     @endif

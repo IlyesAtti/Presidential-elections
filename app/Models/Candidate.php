@@ -13,9 +13,7 @@ class Candidate extends Model {
         'userId',
         'userName',
         'roundIndex',
-        'isVoted',
-        'votes',
-        'votedFor'
+        'votes'
     ];
 
     protected $hidden = [

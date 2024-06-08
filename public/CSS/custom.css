@@ -20,8 +20,8 @@ button {
 }
 
 .btn-next-round {
-  background-color: red;
-  color: #fff;
+  background-color: rgb(255, 251, 11);
+  color: #000000;
   margin-left: 45%;
   font-size: 22px;
 }
@@ -84,7 +84,7 @@ button {
 .btn-revoke-candidate {
   color: #000;
   background-color: rgb(255, 2, 2);
-  margin-left: 45%;
+  margin-left: 42.5%;
   font-size: 22px;
   margin-top: 15px;
   margin-bottom: 15px;

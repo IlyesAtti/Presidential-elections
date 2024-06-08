@@ -12,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->id()->uniqid;
+            $table->id();
             $table->unsignedBigInteger('userId');
-            $table->string('userName');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->string('userName')->references('name')->on('users');
             $table->integer('roundIndex')->default(1);
             $table->integer('votes')->default(0);
-            $table->boolean('isVoted')->default(false);
-            $table->integer('votedFor')->default(0);
             $table->timestamps();
         });
     }

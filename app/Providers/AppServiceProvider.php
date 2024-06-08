@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Models\User;
-use App\Models\Candidate;
+use App\Models\Round;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CandidatesController;
 
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function boot(): void {
 
-        self::$currentRoundIndex = Candidate::max('roundIndex') ?? 1;
+        self::$currentRoundIndex = Round::max('index') ?? 1;
     }
     
     public static function getCurrentRoundIndex() {

@@ -4,30 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidate;
+use App\Models\Round;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
 
 class VotesController extends Controller {
     public function vote(Request $req) {
+        $userId = Auth::id();
         $candidate = Candidate::find($req->id);
         if ($candidate && Auth::check()) {
-            $userId = $req->userId;
+            $userId = Auth::id();
             $roundIndex = $candidate->roundIndex;
-            $userWhoVote = Candidate::where('userId', $userId)
-                                    ->where('roundIndex', $roundIndex)
-                                    ->first();
-
-            if ($userWhoVote && !$userWhoVote->isVoted) {
+            $round = Round::where('index', $roundIndex)->first();
+    
+            $existingVote = Vote::where('userId', $userId)
+                                ->where('roundIndex', $round->id)
+                                ->first();
+    
+            if (!$existingVote) {
                 $candidate->votes += 1;
                 $candidate->save();
-                $userWhoVote->votedFor = $candidate->userId;
-                $userWhoVote->isVoted = true;
-                $userWhoVote->save();
-
-                return redirect()->back();
+    
+                Vote::create([
+                    'userId' => $userId, 
+                    'candidateId' => $candidate->id,
+                    'roundIndex' => $round->id,
+                ]);
             }
-        } else {
-            return redirect()->back();
         }
+        return redirect()->back();
     }
 
     public function revokeVote(Request $req) {
@@ -35,21 +40,20 @@ class VotesController extends Controller {
         if ($candidate && Auth::check()) {
             $userId = Auth::id();
             $roundIndex = $candidate->roundIndex;
-            $userWhoVote = Candidate::where('userId', $userId)
-                                    ->where('roundIndex', $roundIndex)
-                                    ->first();
+            $round = Round::where('index', $roundIndex)->first();
 
-            if ($userWhoVote && $userWhoVote->isVoted && $userWhoVote->votedFor == $candidate->userId) {
+            $existingVote = Vote::where('userId', $userId)
+                                ->where('roundIndex', $round->index)
+                                ->where('candidateId', $candidate->id)
+                                ->first();
+
+            if ($existingVote) {
                 $candidate->votes -= 1;
                 $candidate->save();
-                $userWhoVote->votedFor = 0;
-                $userWhoVote->isVoted = false;
-                $userWhoVote->save();
 
-                return redirect()->back()->with('message', 'You have successfully revoked your vote.');
-            } 
-        } else {
-            return redirect()->back();
+                $existingVote->delete();
+            }
         }
+        return redirect()->back(); 
     }
 }
